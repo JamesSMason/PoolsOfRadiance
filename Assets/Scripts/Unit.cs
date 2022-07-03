@@ -9,9 +9,9 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetMouseButtonDown(0))
         {
-            Move(new Vector3(6, 0, 6));
+            Move(MouseWorld.GetPosition());
         }
 
         if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
