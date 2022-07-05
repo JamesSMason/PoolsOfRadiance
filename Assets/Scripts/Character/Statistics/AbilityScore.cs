@@ -12,6 +12,11 @@ public class AbilityScore
         return ability;
     }
 
+    public void SetAbility(Abilities ability)
+    {
+        this.ability = ability;
+    }
+
     public int GetValue()
     {
         return value;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ab54af5cfb5db4a8d1bb1059ddfcec, type: 3}
-  m_Name: DwarfSO
+  m_Name: Dwarf
   m_EditorClassIdentifier: 
   race: 0
   abilityScoreList:

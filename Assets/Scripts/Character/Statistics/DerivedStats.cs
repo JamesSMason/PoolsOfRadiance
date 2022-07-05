@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class DerivedStats : MonoBehaviour
 {
-    private List<AbilityScore> adjustedAbilityScoreList;
-    private List<AbilityScore> raceAbilityScoreList;
+    private List<AbilityScore> derivedAbilityScoreList;
     private List<int> abilityScoreModifiers;
     private int speed;
 
@@ -19,10 +18,25 @@ public class DerivedStats : MonoBehaviour
 
     private void Start()
     {
+        InitialiseDerivedAbilityScoreList();
+
         CalculateAbilityScores();
         CalculateAbilityModifiers();
 
         DebugScores();
+    }
+
+    private void InitialiseDerivedAbilityScoreList()
+    {
+        derivedAbilityScoreList = new List<AbilityScore>();
+
+        foreach (AbilityScore score in unitAbilities.GetAbilityScoreList())
+        {
+            AbilityScore baseScore = new AbilityScore();
+            baseScore.SetAbility(score.GetAbility());
+            baseScore.SetValue(score.GetValue());
+            derivedAbilityScoreList.Add(baseScore);
+        }
     }
 
     private void OnEnable()
@@ -30,14 +44,16 @@ public class DerivedStats : MonoBehaviour
         unitAbilities.OnAbilityChanged += UnitAbilities_OnAbilityChanged;
     }
 
+    private void OnDisable()
+    {
+        unitAbilities.OnAbilityChanged -= UnitAbilities_OnAbilityChanged;
+    }
+
     private void CalculateAbilityScores()
     {
-        adjustedAbilityScoreList = unitAbilities.GetAbilityScoreList();
-        raceAbilityScoreList = unitRace.GetAbilityScoreList();
-
-        foreach (AbilityScore bonus in raceAbilityScoreList)
+        foreach (AbilityScore bonus in unitRace.GetAbilityScoreList())
         {
-            foreach (AbilityScore score in adjustedAbilityScoreList)
+            foreach (AbilityScore score in derivedAbilityScoreList)
             {
                 if (bonus.GetAbility() == score.GetAbility())
                 {
@@ -52,7 +68,7 @@ public class DerivedStats : MonoBehaviour
     {
         abilityScoreModifiers = new List<int>(6);
 
-        foreach (AbilityScore score in adjustedAbilityScoreList)
+        foreach (AbilityScore score in derivedAbilityScoreList)
         {
             abilityScoreModifiers.Add(AbilityModifiers.GetAbilityModifier(score.GetValue()));
         }
@@ -60,9 +76,9 @@ public class DerivedStats : MonoBehaviour
 
     private void DebugScores()
     {
-        for (int i = 0; i < adjustedAbilityScoreList.Count; i++)
+        for (int i = 0; i < derivedAbilityScoreList.Count; i++)
         {
-            Debug.Log($"{adjustedAbilityScoreList[i].GetAbility()} = {adjustedAbilityScoreList[i].GetValue()}, with a modifier of {abilityScoreModifiers[i]}.");
+            Debug.Log($"{derivedAbilityScoreList[i].GetAbility()} = {derivedAbilityScoreList[i].GetValue()}, with a modifier of {abilityScoreModifiers[i]}.");
         }
     }
 
