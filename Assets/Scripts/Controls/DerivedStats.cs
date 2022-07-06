@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DerivedStats : MonoBehaviour
 {
+    private Unit unit;
     private List<AbilityScore> derivedAbilityScoreList;
     private List<int> abilityScoreModifiers;
     private int speed;
@@ -10,23 +12,19 @@ public class DerivedStats : MonoBehaviour
     private UnitAbilities unitAbilities;
     private UnitRace unitRace;
 
-    private void Awake()
-    {
-        unitAbilities = GetComponent<UnitAbilities>();
-        unitRace = GetComponent<UnitRace>();
-    }
+    public event EventHandler OnAbilitiesChanged;
 
-    private void Start()
+    public void UpdateUnit(Unit unit)
     {
-        InitialiseDerivedAbilityScoreList();
-
+        this.unit = unit;
+        unitAbilities = unit.GetComponent<UnitAbilities>();
+        unitRace = unit.GetComponent<UnitRace>();
         CalculateAbilityScores();
         CalculateAbilityModifiers();
-
-        DebugScores();
     }
 
-    private void InitialiseDerivedAbilityScoreList()
+
+    private void CalculateAbilityScores()
     {
         derivedAbilityScoreList = new List<AbilityScore>();
 
@@ -37,20 +35,7 @@ public class DerivedStats : MonoBehaviour
             baseScore.SetValue(score.GetValue());
             derivedAbilityScoreList.Add(baseScore);
         }
-    }
 
-    private void OnEnable()
-    {
-        unitAbilities.OnAbilityChanged += UnitAbilities_OnAbilityChanged;
-    }
-
-    private void OnDisable()
-    {
-        unitAbilities.OnAbilityChanged -= UnitAbilities_OnAbilityChanged;
-    }
-
-    private void CalculateAbilityScores()
-    {
         foreach (AbilityScore bonus in unitRace.GetAbilityScoreList())
         {
             foreach (AbilityScore score in derivedAbilityScoreList)
@@ -72,6 +57,7 @@ public class DerivedStats : MonoBehaviour
         {
             abilityScoreModifiers.Add(AbilityModifiers.GetAbilityModifier(score.GetValue()));
         }
+        OnAbilitiesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void DebugScores()
@@ -82,10 +68,24 @@ public class DerivedStats : MonoBehaviour
         }
     }
 
-    private void UnitAbilities_OnAbilityChanged()
+    public List<AbilityScore> GetAbilityScoresList()
     {
-        CalculateAbilityScores();
-        CalculateAbilityModifiers();
         DebugScores();
+        return derivedAbilityScoreList;
+    }
+
+    public List<int> GetAbilityScoreModifiersList()
+    {
+        return abilityScoreModifiers;
+    }
+
+    public int GetSpeed()
+    {
+        return speed;
+    }
+
+    public string GetCharacterName()
+    {
+        return unit.gameObject.name;
     }
 }
