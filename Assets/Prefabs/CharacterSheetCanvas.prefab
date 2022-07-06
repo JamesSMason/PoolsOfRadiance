@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcd71b97a7455241ab77e2afe1ec554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  derivedStats: {fileID: 0}
+  selectedUnit: {fileID: 0}
   characterName: {fileID: 3993998125165672081}
   abilityValues:
   - {fileID: 3993998124588737031}

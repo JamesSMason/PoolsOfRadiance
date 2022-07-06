@@ -4,7 +4,6 @@ using UnityEngine;
 public class Testing : MonoBehaviour
 {
     [SerializeField] private Unit[] unit;
-    [SerializeField] private DerivedStats stats;
 
     private int unitIndex = 0;
 
@@ -17,7 +16,7 @@ public class Testing : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            FindObjectOfType<DerivedStats>().UpdateUnit(unit[unitIndex]);
+            FindObjectOfType<SelectedUnit>().SetSelectedUnit(unit[unitIndex]);
             unitIndex++;
             if (unitIndex >= unit.Length)
             {
