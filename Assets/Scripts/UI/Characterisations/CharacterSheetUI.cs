@@ -64,42 +64,20 @@ namespace PoR.UI.Characterisations
 
         private void UpdateCharacterSheet()
         {
-            List<AbilityScore> abilityScoreList = currentCharAbilityScores.GetAbilityScoresList();
-            List<int> abilityScoreModifiersList = currentCharAbilityScores.GetAbilityScoreModifiersList();
-            List<int> abilityScoreSavingThrowBonusList = currentCharAbilityScores.GetAbilityScoreSavingThrowBonusList();
-
             nameText.text = basePersonalDetails.GetCharacterName();
             levelText.text = charLevel.GetLevel().ToString();
             classText.text = baseClassDetails.GetCharacterClass();
             raceText.text = baseRaceDetails.GetCharacterRace();
 
-            for (int i = 0; i < abilityScoreList.Count; i++)
+            for (int i = 0; i < currentCharAbilityScores.GetAbilityScoresList().Count; i++)
             {
-                abilityValuesText[i].text = abilityScoreList[i].GetValue().ToString();
-                if (abilityScoreModifiersList[i] > 0)
-                {
-                    abilityModifiersText[i].text = $"+{abilityScoreModifiersList[i]}";
-                }
-                else
-                {
-                    abilityModifiersText[i].text = abilityScoreModifiersList[i].ToString();
-                }
-                if (abilityScoreSavingThrowBonusList[i] > 0)
-                {
-                    abilitySaveValuesText[i].text = $"+{abilityScoreSavingThrowBonusList[i]}";
-                }
-                else
-                {
-                    abilitySaveValuesText[i].text = abilityScoreSavingThrowBonusList[i].ToString();
-                }
-                if (baseClassDetails.GetIsSaveProficient(abilityScoreList[i].GetAbility()))
-                {
-                    saveProficiencyImage[i].sprite = isProficientImage;
-                }
-                else
-                {
-                    saveProficiencyImage[i].sprite = notProficientImage;
-                }
+                abilityValuesText[i].text = currentCharAbilityScores.GetAbilityScoreText(i) ;
+
+                abilityModifiersText[i].text = currentCharAbilityScores.GetAbilityScoreModifierText(i);
+
+                abilitySaveValuesText[i].text = currentCharAbilityScores.GetAbilityScoreSavingThrowBonusText(i);
+
+                saveProficiencyImage[i].sprite = baseClassDetails.GetIsSaveProficient(i) ? isProficientImage : notProficientImage;
             }
 
             ACText.text = charAC.GetArmourClass().ToString();

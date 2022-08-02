@@ -73,7 +73,7 @@ namespace PoR.Character.Settings
                 int save = abilityScoreModifiersList[i];
                 for (int j = 0; j < baseClasses.Length; j++)
                 {
-                    if (!baseClasses[j].GetIsSaveProficient(derivedAbilityScoreList[i].GetAbility()))
+                    if (!baseClasses[j].GetIsSaveProficient(i))
                     {
                         continue;
                     }
@@ -88,14 +88,48 @@ namespace PoR.Character.Settings
             return derivedAbilityScoreList;
         }
 
+        public Abilities GetAbility(int index)
+        {
+            return derivedAbilityScoreList[index].GetAbility();
+        }
+
+        public string GetAbilityScoreText(int index)
+        {
+            return $"{derivedAbilityScoreList[index].GetValue()}";
+        }
+
         public List<int> GetAbilityScoreModifiersList()
         {
             return abilityScoreModifiersList;
         }
 
+        public string GetAbilityScoreModifierText(int index)
+        {
+            if (abilityScoreModifiersList[index] > 0)
+            {
+                return $"+{abilityScoreModifiersList[index]}";
+            }
+            else
+            {
+                return $"{abilityScoreModifiersList[index]}";
+            }
+        }
+
         public List<int> GetAbilityScoreSavingThrowBonusList()
         {
             return abilityScoreSavingThrowBonusList;
+        }
+
+        public string GetAbilityScoreSavingThrowBonusText(int index)
+        {
+            if (abilityScoreSavingThrowBonusList[index] > 0)
+            {
+                return $"+{abilityScoreSavingThrowBonusList[index]}";
+            }
+            else
+            {
+                return $"+{abilityScoreSavingThrowBonusList[index]}";
+            }
         }
     }
 }

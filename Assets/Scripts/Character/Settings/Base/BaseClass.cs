@@ -34,9 +34,9 @@ namespace PoR.Character.Settings.Base
             return hitDie;
         }
 
-        public bool GetIsSaveProficient(Abilities ability)
+        public bool GetIsSaveProficient(int index)
         {
-            return abilitySaveProficiencyList.Contains(ability);
+            return abilitySaveProficiencyList.Contains(GetComponent<CharAbilityScores>().GetAbility(index));
         }
 
         public int GetMaxHitPoints()

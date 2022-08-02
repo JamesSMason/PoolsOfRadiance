@@ -28,5 +28,10 @@ namespace PoR.Character.Customisation.Statistics
         {
             this.value = value;
         }
+
+        public override string ToString()
+        {
+            return value.ToString();
+        }
     }
 }
