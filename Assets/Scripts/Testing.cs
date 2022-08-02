@@ -1,27 +1,29 @@
-using System;
+using Por.Controls;
+using PoR.Character;
 using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
-    [SerializeField] private Unit[] unit;
+    [SerializeField] private Unit[] units;
 
     private int unitIndex = 0;
 
     private void Start()
     {
-        unit = FindObjectsOfType<Unit>();
+        units = FindObjectsOfType<Unit>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            FindObjectOfType<SelectedUnit>().SetSelectedUnit(unit[unitIndex]);
             unitIndex++;
-            if (unitIndex >= unit.Length)
+            if (unitIndex >= units.Length)
             {
                 unitIndex = 0;
             }
         }
+
+        SelectedUnit.Instance.SetSelectedUnit(units[unitIndex]);
     }
 }

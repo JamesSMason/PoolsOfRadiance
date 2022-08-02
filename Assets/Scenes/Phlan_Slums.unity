@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67305dcb2fc194a4b90266a9f3d49d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedUnit: {fileID: 1643130130}
 --- !u!1001 &1098485473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -589,6 +590,42 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087870679}
     m_Modifications:
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: age
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: gender
+      value: Male
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: height
+      value: 6' 1"
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: weight
+      value: 250lbs
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: eyeColour
+      value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: hairColour
+      value: Blonde
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: skinColour
+      value: Tanned
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: characterName
+      value: Caramon Majere
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: backgroundDetails
+      value: Soldier
+      objectReference: {fileID: 0}
     - target: {fileID: 1983059527107701189, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: classSO
       value: 
@@ -596,7 +633,7 @@ PrefabInstance:
     - target: {fileID: 1983059527107701189, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: playerClass
       value: 
-      objectReference: {fileID: 11400000, guid: 1e362c4e3abf23a4980b7b73331b2a78, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3906639855456063614, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: m_Name
       value: Caramon Majere
@@ -750,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f4d51cda7e0a44f9fdfe71dbfe4413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: []
+  units: []
 --- !u!1 &1437682755
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628899296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.209557, y: -9.80127, z: 20.485628}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -821,6 +858,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1643130130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3152795835368328960, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+  m_PrefabInstance: {fileID: 1098485473}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dd06929eaec454381138a3e02f1627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1667949395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,10 +877,46 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087870679}
     m_Modifications:
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: age
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: gender
+      value: Male
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: height
+      value: 5' 6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: weight
+      value: 120lbs
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: eyeColour
+      value: Black
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: hairColour
+      value: White
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: skinColour
+      value: Pale White
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: characterName
+      value: Raistlin Majere
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: backgroundDetails
+      value: Not nice
+      objectReference: {fileID: 0}
     - target: {fileID: 1983059527107701189, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: classSO
       value: 
-      objectReference: {fileID: 11400000, guid: 1e362c4e3abf23a4980b7b73331b2a78, type: 2}
+      objectReference: {fileID: 11400000, guid: 49ddb97e83b04bd48b3c15bb25571640, type: 2}
     - target: {fileID: 3906639855456063614, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: m_Name
       value: Raistlin Majere
@@ -1282,6 +1366,42 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087870679}
     m_Modifications:
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: age
+      value: 317
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: gender
+      value: Male
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: height
+      value: 4' 11"
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: weight
+      value: 195lbs
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: eyeColour
+      value: Brown
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: hairColour
+      value: Grey
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: skinColour
+      value: Tanned
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: characterName
+      value: Flint Fireforge
+      objectReference: {fileID: 0}
+    - target: {fileID: 764225784610469559, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
+      propertyPath: backgroundDetails
+      value: Nice
+      objectReference: {fileID: 0}
     - target: {fileID: 1983059527107701189, guid: 54993cde9d4ef5848818636f92992fa9, type: 3}
       propertyPath: classSO
       value: 
@@ -1397,6 +1517,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1628899297}
     m_Modifications:
+    - target: {fileID: 2948857803749475483, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948857803749475483, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948857803749475483, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948857803749475483, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3993998124701989088, guid: c824438576775f047bd2413b2b0c4083, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1486,13 +1622,93 @@ PrefabInstance:
       value: CharacterSheetCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 3993998124701989100, guid: c824438576775f047bd2413b2b0c4083, type: 3}
-      propertyPath: derivedStats
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993998124701989100, guid: c824438576775f047bd2413b2b0c4083, type: 3}
       propertyPath: selectedUnit
       value: 
       objectReference: {fileID: 1035857557}
+    - target: {fileID: 3993998124701989100, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: proficiencyImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 78487c93d7768c24abb8b49f367281b7, type: 3}
+    - target: {fileID: 8825547366903399515, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366903399515, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366903399515, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366903399515, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366979086756, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366979086756, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366979086756, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547366979086756, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547367390849093, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547367390849093, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547367390849093, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547367390849093, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368283153242, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368283153242, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368283153242, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368283153242, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368588320587, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368588320587, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368588320587, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825547368588320587, guid: c824438576775f047bd2413b2b0c4083, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c824438576775f047bd2413b2b0c4083, type: 3}
