@@ -13,16 +13,18 @@ namespace PoR.UI.Characterisations
     {
         [SerializeField] private Sprite isProficientImage = null;
         [SerializeField] private Sprite notProficientImage = null;
-        [SerializeField] private TextMeshProUGUI[] abilityValuesText = new TextMeshProUGUI[6];
-        [SerializeField] private TextMeshProUGUI[] abilityModifiersText = new TextMeshProUGUI[6];
-        [SerializeField] private TextMeshProUGUI[] abilitySaveValuesText = new TextMeshProUGUI[6];
-        [SerializeField] private Image[] saveProficiencyImage = new Image[6];
         [SerializeField] private TextMeshProUGUI ACText = null;
 
-        private CharAbilityScores currentCharAbilityScores;
-        private BaseClass baseClassDetails;
-
         private CharArmourClass charAC;
+
+        public Sprite GetProficiencyImage(bool isProficient)
+        {
+            if (isProficient)
+            {
+                return isProficientImage;
+            }
+            return notProficientImage;
+        }
 
         private void UpdateSelectedUnit(Unit currentUnit)
         {
@@ -31,9 +33,6 @@ namespace PoR.UI.Characterisations
                 return;
             }
 
-            currentCharAbilityScores = currentUnit.GetComponent<CharAbilityScores>();
-            baseClassDetails = currentUnit.GetComponent<BaseClass>();
-
             charAC = currentUnit.GetComponent<CharArmourClass>();
 
             UpdateCharacterSheet();
@@ -41,16 +40,6 @@ namespace PoR.UI.Characterisations
 
         private void UpdateCharacterSheet()
         {
-            for (int i = 0; i < currentCharAbilityScores.GetAbilityScoresList().Count; i++)
-            {
-                abilityValuesText[i].text = currentCharAbilityScores.GetAbilityScoreText(i) ;
-
-                abilityModifiersText[i].text = currentCharAbilityScores.GetAbilityScoreModifierText(i);
-
-                abilitySaveValuesText[i].text = currentCharAbilityScores.GetAbilityScoreSavingThrowBonusText(i);
-
-                saveProficiencyImage[i].sprite = baseClassDetails.GetIsSaveProficient(i) ? isProficientImage : notProficientImage;
-            }
 
             ACText.text = charAC.GetArmourClass().ToString();
         }

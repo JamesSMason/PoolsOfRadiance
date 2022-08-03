@@ -1,8 +1,10 @@
 using Por.Controls;
 using PoR.Character;
+using PoR.Character.Customisation.Statistics;
 using PoR.Character.Settings;
 using PoR.Character.Settings.Base;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,20 +13,13 @@ namespace PoR.UI.Characterisations
 {
     public class StatisticsPanelUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI nameText = null;
-        [SerializeField] private RawImage portraitImage = null;
-        [SerializeField] private TextMeshProUGUI levelText = null;
-        [SerializeField] private TextMeshProUGUI classText = null;
-        [SerializeField] private TextMeshProUGUI raceText = null;
-        [SerializeField] private TextMeshProUGUI alignmentText = null;
-        [SerializeField] private TextMeshProUGUI xpText = null;
-        [SerializeField] private TextMeshProUGUI backgroundText = null;
-        [SerializeField] private TextMeshProUGUI ageText = null;
-        [SerializeField] private TextMeshProUGUI heightText = null;
-        [SerializeField] private TextMeshProUGUI weightText = null;
-        [SerializeField] private TextMeshProUGUI eyesText = null;
-        [SerializeField] private TextMeshProUGUI skinText = null;
-        [SerializeField] private TextMeshProUGUI hairText = null;
+        [SerializeField] private CharacterSheetUI characterSheetUI = null;
+        [SerializeField] private TextMeshProUGUI[] abilityValuesText = new TextMeshProUGUI[6];
+        [SerializeField] private TextMeshProUGUI[] abilityModifiersText = new TextMeshProUGUI[6];
+        [SerializeField] private TextMeshProUGUI[] abilitySaveValuesText = new TextMeshProUGUI[6];
+        [SerializeField] private Image[] saveProficiencyImage = new Image[6];
+        [SerializeField] private TextMeshProUGUI passivePerceptionText = null;
+        [SerializeField] private TextMeshProUGUI proficiencyBonusText = null;
 
         private Unit currentUnit;
 
@@ -42,30 +37,44 @@ namespace PoR.UI.Characterisations
 
         private void UpdateFields()
         {
-            CharPersonal charPersonal = currentUnit.GetComponent<CharPersonal>();
+            CharAbilityScores currentCharAbilityScores = currentUnit.GetComponent<CharAbilityScores>();
+            List<AbilityScore> abilityScoreList = currentCharAbilityScores.GetAbilityScoresList();
+            List<AbilityScore> abilityModifierList = currentCharAbilityScores.GetAbilityScoreModifiersList();
+            List<AbilityScore> abilitySaveList = currentCharAbilityScores.GetAbilityScoreSavingThrowBonusList();
 
-            nameText.text = charPersonal.GetCharacterName();
-            levelText.text = currentUnit.GetComponent<CharLevel>().GetLevel().ToString();
-            classText.text = currentUnit.GetComponent<BaseClass>().GetCharacterClass();
-            raceText.text = currentUnit.GetComponent<BaseRace>().GetCharacterRace();
-            alignmentText.text = charPersonal.GetCharacterAlignment();
-            // TODO: Generate personal texture on character creation
-            portraitImage.texture = charPersonal.GetCharacterPortrait();
-            // TODO: XP
-            xpText.text = "0";
-            backgroundText.text = charPersonal.GetCharacterBackground();
-            ageText.text = charPersonal.GetCharacterAge();
-            heightText.text = charPersonal.GetCharacterHeight();
-            weightText.text = charPersonal.GetCharacterWeight();
-            eyesText.text = charPersonal.GetCharacterEyeColour();
-            skinText.text = charPersonal.GetCharacterSkinColour();
-            hairText.text = charPersonal.GetCharacterHairColour();
+            for (int i = 0; i < currentCharAbilityScores.GetAbilityScoresList().Count; i++)
+            {
+                abilityValuesText[i].text = abilityScoreList[i].GetValue().ToString();
+
+                abilityModifiersText[i].text = abilityModifierList[i].GetValue().ToString();
+
+                abilitySaveValuesText[i].text = abilitySaveList[i].GetValue().ToString();
+
+                saveProficiencyImage[i].sprite = characterSheetUI.GetProficiencyImage(currentUnit.GetComponent<BaseClass>().GetIsSaveProficient(i));
+            }
+
+            int passivePerception = 10;
+            foreach (AbilityScore score in abilityScoreList)
+            {
+                if (score.GetAbility() == Abilities.Wisdom)
+                {
+                    passivePerception += score.GetValue();
+                    break;
+                }
+            }
+
+            passivePerceptionText.text = $"{passivePerception}";
+
+            proficiencyBonusText.text = $"{ProficiencyBonus.GetProficiencyBonus(currentUnit.GetComponent<CharLevel>().GetLevel())}";
         }
 
         private void SelectedUnit_OnSelectedUnitChanged(object sender, EventArgs e)
         {
             currentUnit = sender as Unit;
-            UpdateFields();
+            if (currentUnit != null)
+            {
+                UpdateFields();
+            }
         }
     }
 }

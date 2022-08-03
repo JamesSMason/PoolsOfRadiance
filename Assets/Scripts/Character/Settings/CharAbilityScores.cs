@@ -9,8 +9,8 @@ namespace PoR.Character.Settings
     public class CharAbilityScores : MonoBehaviour
     {
         private List<AbilityScore> derivedAbilityScoreList;
-        private List<int> abilityScoreModifiersList;
-        private List<int> abilityScoreSavingThrowBonusList;
+        private List<AbilityScore> abilityScoreModifiersList;
+        private List<AbilityScore> abilityScoreSavingThrowBonusList;
 
         private BaseAbilities baseAbilities;
         private BaseRace baseRace;
@@ -56,30 +56,30 @@ namespace PoR.Character.Settings
 
         private void CalculateAbilityModifiers()
         {
-            abilityScoreModifiersList = new List<int>(6);
+            abilityScoreModifiersList = derivedAbilityScoreList;
 
-            foreach (AbilityScore score in derivedAbilityScoreList)
+            for (int i = 0; i < derivedAbilityScoreList.Count; i++)
             {
-                abilityScoreModifiersList.Add(AbilityModifiers.GetAbilityModifier(score.GetValue()));
+                abilityScoreModifiersList[i].SetValue(AbilityModifiers.GetAbilityModifier(derivedAbilityScoreList[i].GetValue()));
             }
         }
 
         private void CalculateAbilitySaves()
         {
-            abilityScoreSavingThrowBonusList = new List<int>(6);
+            abilityScoreSavingThrowBonusList = derivedAbilityScoreList;
 
             for (int i = 0; i < derivedAbilityScoreList.Count; i++)
             {
-                int save = abilityScoreModifiersList[i];
+                int save = abilityScoreModifiersList[i].GetValue();
                 for (int j = 0; j < baseClasses.Length; j++)
                 {
                     if (!baseClasses[j].GetIsSaveProficient(i))
                     {
                         continue;
                     }
-                    save += ProficiencyBonuses.GetProficiencyBonus(GetComponent<CharLevel>().GetLevel());
+                    save += ProficiencyBonus.GetProficiencyBonus(GetComponent<CharLevel>().GetLevel());
                 }
-                abilityScoreSavingThrowBonusList.Add(save);
+                abilityScoreSavingThrowBonusList[i].SetValue(save);
             }
         }
 
@@ -93,43 +93,14 @@ namespace PoR.Character.Settings
             return derivedAbilityScoreList[index].GetAbility();
         }
 
-        public string GetAbilityScoreText(int index)
-        {
-            return $"{derivedAbilityScoreList[index].GetValue()}";
-        }
-
-        public List<int> GetAbilityScoreModifiersList()
+        public List<AbilityScore> GetAbilityScoreModifiersList()
         {
             return abilityScoreModifiersList;
         }
 
-        public string GetAbilityScoreModifierText(int index)
-        {
-            if (abilityScoreModifiersList[index] > 0)
-            {
-                return $"+{abilityScoreModifiersList[index]}";
-            }
-            else
-            {
-                return $"{abilityScoreModifiersList[index]}";
-            }
-        }
-
-        public List<int> GetAbilityScoreSavingThrowBonusList()
+        public List<AbilityScore> GetAbilityScoreSavingThrowBonusList()
         {
             return abilityScoreSavingThrowBonusList;
-        }
-
-        public string GetAbilityScoreSavingThrowBonusText(int index)
-        {
-            if (abilityScoreSavingThrowBonusList[index] > 0)
-            {
-                return $"+{abilityScoreSavingThrowBonusList[index]}";
-            }
-            else
-            {
-                return $"+{abilityScoreSavingThrowBonusList[index]}";
-            }
         }
     }
 }

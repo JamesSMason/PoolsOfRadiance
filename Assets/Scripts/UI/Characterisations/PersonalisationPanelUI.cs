@@ -65,7 +65,10 @@ namespace PoR.UI.Characterisations
         private void SelectedUnit_OnSelectedUnitChanged(object sender, EventArgs e)
         {
             currentUnit = sender as Unit;
-            UpdateFields();
+            if (currentUnit != null)
+            {
+                UpdateFields();
+            }
         }
     }
 }
