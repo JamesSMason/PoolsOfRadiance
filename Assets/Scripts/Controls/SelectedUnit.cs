@@ -10,7 +10,7 @@ namespace Por.Controls
 
         public event EventHandler OnSelectedUnitChanged;
 
-        [SerializeField] Unit selectedUnit;
+        [SerializeField] Unit currentUnit;
 
         private void Awake()
         {
@@ -24,13 +24,13 @@ namespace Por.Controls
 
         public void SetSelectedUnit(Unit selectedUnit)
         {
-            this.selectedUnit = selectedUnit;
+            this.currentUnit = selectedUnit;
             OnSelectedUnitChanged?.Invoke(selectedUnit, EventArgs.Empty);
         }
 
-        public Unit GetSelectedUnit()
+        public Unit GetCurrentUnit()
         {
-            return selectedUnit;
+            return currentUnit;
         }
     }
 }

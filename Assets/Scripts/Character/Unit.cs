@@ -10,6 +10,11 @@ namespace PoR.Character
 
         private Vector3 targetPosition;
 
+        private void Start()
+        {
+            targetPosition = transform.position;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
