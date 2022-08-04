@@ -15,3 +15,4 @@ MonoBehaviour:
   playerClass: 3
   hitDie: 6
   abilitySaveProficiencyList: 0300000004000000
+  classSkillProficiencyOptions: 02000000050000000600000008000000090000000e000000

@@ -42,7 +42,7 @@ namespace PoR.UI.Characterisations
             List<AbilityScore> abilityModifierList = currentCharAbilityScores.GetAbilityScoreModifiersList();
             List<AbilityScore> abilitySaveList = currentCharAbilityScores.GetAbilityScoreSavingThrowBonusList();
 
-            for (int i = 0; i < currentCharAbilityScores.GetAbilityScoresList().Count; i++)
+            for (int i = 0; i < abilityScoreList.Count; i++)
             {
                 abilityValuesText[i].text = abilityScoreList[i].GetValue().ToString();
 
@@ -53,17 +53,7 @@ namespace PoR.UI.Characterisations
                 saveProficiencyImage[i].sprite = characterSheetUI.GetProficiencyImage(currentUnit.GetComponent<BaseClass>().GetIsSaveProficient(i));
             }
 
-            int passivePerception = 10;
-            foreach (AbilityScore score in abilityScoreList)
-            {
-                if (score.GetAbility() == Abilities.Wisdom)
-                {
-                    passivePerception += score.GetValue();
-                    break;
-                }
-            }
-
-            passivePerceptionText.text = $"{passivePerception}";
+            passivePerceptionText.text = $"{currentCharAbilityScores.GetPassivePerception()}";
 
             proficiencyBonusText.text = $"{ProficiencyBonus.GetProficiencyBonus(currentUnit.GetComponent<CharLevel>().GetLevel())}";
         }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4925438870130068755}
   - component: {fileID: 2466129475548103109}
   - component: {fileID: 8867891946391087460}
+  - component: {fileID: 4131579929981860577}
   - component: {fileID: 2199460898529552261}
   - component: {fileID: 1426439606686296660}
   - component: {fileID: 4307382540547501672}
@@ -82,6 +83,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceSO: {fileID: 0}
+--- !u!114 &4131579929981860577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906639855456063614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02dd5e25b1f11164ba2aaf4407a845ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillProficiencies: 
 --- !u!114 &2199460898529552261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +166,7 @@ MonoBehaviour:
   eyeColour: 
   skinColour: 
   backgroundDetails: 
+  portraitTexture: {fileID: 0}
 --- !u!114 &368582947887876821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b4d3ba43ae3404893930c8161b998f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charClass: {fileID: 4131579929981860577}
+  charAbilityScores: {fileID: 2199460898529552261}
 --- !u!114 &3152795835368328960
 MonoBehaviour:
   m_ObjectHideFlags: 0

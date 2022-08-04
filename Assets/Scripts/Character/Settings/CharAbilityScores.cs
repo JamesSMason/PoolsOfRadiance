@@ -18,11 +18,15 @@ namespace PoR.Character.Settings
 
         public event EventHandler OnAbilitiesChanged;
 
-        private void Start()
+        private void Awake()
         {
             baseAbilities = GetComponent<BaseAbilities>();
             baseRace = GetComponent<BaseRace>();
             baseClasses = GetComponents<BaseClass>();
+        }
+
+        private void Start()
+        {
             CalculateAbilityScores();
             CalculateAbilityModifiers();
             CalculateAbilitySaves();
@@ -56,17 +60,29 @@ namespace PoR.Character.Settings
 
         private void CalculateAbilityModifiers()
         {
-            abilityScoreModifiersList = derivedAbilityScoreList;
+            abilityScoreModifiersList = new List<AbilityScore>();
 
-            for (int i = 0; i < derivedAbilityScoreList.Count; i++)
+            foreach (AbilityScore score in derivedAbilityScoreList)
             {
-                abilityScoreModifiersList[i].SetValue(AbilityModifiers.GetAbilityModifier(derivedAbilityScoreList[i].GetValue()));
+                AbilityScore baseScore = new AbilityScore();
+                baseScore.SetAbility(score.GetAbility());
+                baseScore.SetValue(AbilityModifiers.GetAbilityModifier(score.GetValue()));
+                abilityScoreModifiersList.Add(baseScore);
             }
         }
 
         private void CalculateAbilitySaves()
         {
-            abilityScoreSavingThrowBonusList = derivedAbilityScoreList;
+            abilityScoreSavingThrowBonusList = new List<AbilityScore>();
+
+
+            foreach (AbilityScore score in abilityScoreModifiersList)
+            {
+                AbilityScore baseScore = new AbilityScore();
+                baseScore.SetAbility(score.GetAbility());
+                baseScore.SetValue(0);
+                abilityScoreSavingThrowBonusList.Add(baseScore);
+            }
 
             for (int i = 0; i < derivedAbilityScoreList.Count; i++)
             {
@@ -83,9 +99,19 @@ namespace PoR.Character.Settings
             }
         }
 
-        public List<AbilityScore> GetAbilityScoresList()
+        public int GetPassivePerception()
         {
-            return derivedAbilityScoreList;
+            int passivePerception = 10;
+            foreach (AbilityScore score in GetAbilityScoreSavingThrowBonusList())
+            {
+                if (score.GetAbility() != Abilities.Wisdom)
+                {
+                    continue;
+                }
+                passivePerception += score.GetValue();
+                break;
+            }
+            return passivePerception;
         }
 
         public Abilities GetAbility(int index)
@@ -93,9 +119,27 @@ namespace PoR.Character.Settings
             return derivedAbilityScoreList[index].GetAbility();
         }
 
+        public List<AbilityScore> GetAbilityScoresList()
+        {
+            return derivedAbilityScoreList;
+        }
+
         public List<AbilityScore> GetAbilityScoreModifiersList()
         {
             return abilityScoreModifiersList;
+        }
+
+        public int GetAbilityScoreModifier(Abilities ability)
+        {
+            foreach (AbilityScore modifier in abilityScoreModifiersList)
+            {
+                if (modifier.GetAbility() != ability)
+                {
+                    continue;
+                }
+                return modifier.GetValue();
+            }
+            return 0;
         }
 
         public List<AbilityScore> GetAbilityScoreSavingThrowBonusList()

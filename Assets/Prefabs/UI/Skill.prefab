@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3735523137736398579}
   - component: {fileID: 4593465674546686449}
+  - component: {fileID: 4343259993756517164}
   m_Layer: 0
   m_Name: Skill
   m_TagString: Untagged
@@ -66,6 +67,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4343259993756517164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806435537646182454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddbd52bf092b354da04da2fd60976df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proficiencyImage: {fileID: 584527982669338496}
+  skillScoreText: {fileID: 3008652812081511635}
+  skillNameText: {fileID: 9075230512909964610}
 --- !u!1 &2651411789021783824
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Testing : MonoBehaviour
     private void Start()
     {
         units = FindObjectsOfType<Unit>();
+        SelectedUnit.Instance.SetSelectedUnit(units[0]);
     }
 
     private void Update()
@@ -22,8 +23,8 @@ public class Testing : MonoBehaviour
             {
                 unitIndex = 0;
             }
+            SelectedUnit.Instance.SetSelectedUnit(units[unitIndex]);
+            Debug.Log($"Selected unit is now {units[unitIndex].name}.");
         }
-
-        SelectedUnit.Instance.SetSelectedUnit(units[unitIndex]);
     }
 }

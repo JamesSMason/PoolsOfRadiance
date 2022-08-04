@@ -1,30 +1,17 @@
 using Por.Controls;
 using PoR.Character;
+using PoR.Character.Customisation.Skills;
 using PoR.Character.Settings;
-using PoR.Character.Settings.Base;
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace PoR.UI.Characterisations
 {
     public class SkillsPanelUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI nameText = null;
-        [SerializeField] private RawImage portraitImage = null;
-        [SerializeField] private TextMeshProUGUI levelText = null;
-        [SerializeField] private TextMeshProUGUI classText = null;
-        [SerializeField] private TextMeshProUGUI raceText = null;
-        [SerializeField] private TextMeshProUGUI alignmentText = null;
-        [SerializeField] private TextMeshProUGUI xpText = null;
-        [SerializeField] private TextMeshProUGUI backgroundText = null;
-        [SerializeField] private TextMeshProUGUI ageText = null;
-        [SerializeField] private TextMeshProUGUI heightText = null;
-        [SerializeField] private TextMeshProUGUI weightText = null;
-        [SerializeField] private TextMeshProUGUI eyesText = null;
-        [SerializeField] private TextMeshProUGUI skinText = null;
-        [SerializeField] private TextMeshProUGUI hairText = null;
+        [SerializeField] private CharacterSheetUI characterSheetUI = null;
+        [SerializeField] private SkillsUI skillUIPrefab = null;
+        [SerializeField] private Transform skillUIParent = null;
 
         private Unit currentUnit;
 
@@ -42,24 +29,21 @@ namespace PoR.UI.Characterisations
 
         private void UpdateFields()
         {
-            CharPersonal charPersonal = currentUnit.GetComponent<CharPersonal>();
+            CharSkills charSkills = currentUnit.GetComponent<CharSkills>();
 
-            nameText.text = charPersonal.GetCharacterName();
-            levelText.text = currentUnit.GetComponent<CharLevel>().GetLevel().ToString();
-            classText.text = currentUnit.GetComponent<BaseClass>().GetCharacterClass();
-            raceText.text = currentUnit.GetComponent<BaseRace>().GetCharacterRace();
-            alignmentText.text = charPersonal.GetCharacterAlignment();
-            // TODO: Generate personal texture on character creation
-            portraitImage.texture = charPersonal.GetCharacterPortrait();
-            // TODO: XP
-            xpText.text = "0";
-            backgroundText.text = charPersonal.GetCharacterBackground();
-            ageText.text = charPersonal.GetCharacterAge();
-            heightText.text = charPersonal.GetCharacterHeight();
-            weightText.text = charPersonal.GetCharacterWeight();
-            eyesText.text = charPersonal.GetCharacterEyeColour();
-            skinText.text = charPersonal.GetCharacterSkinColour();
-            hairText.text = charPersonal.GetCharacterHairColour();
+            foreach (Transform child in skillUIParent)
+            {
+                Destroy(child.gameObject);
+            }
+
+            string[] skillStrings = SkillTypes.GetSkills();
+            for (int i = 0; i < skillStrings.Length; i++)
+            {
+                SkillsUI newSkill = Instantiate(skillUIPrefab, skillUIParent);
+                newSkill.SetSkillName(skillStrings[i]);
+                newSkill.SetSkillScore(charSkills.GetSkillModifierValue(i));
+                newSkill.SetProficiencyImage(characterSheetUI.GetProficiencyImage(charSkills.GetSkillProficiencies(i)));
+            }
         }
 
         private void SelectedUnit_OnSelectedUnitChanged(object sender, EventArgs e)

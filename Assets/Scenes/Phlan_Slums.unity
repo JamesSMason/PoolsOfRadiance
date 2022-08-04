@@ -228,37 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &103280349 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3993998125458320774, guid: c824438576775f047bd2413b2b0c4083, type: 3}
-  m_PrefabInstance: {fileID: 3993998125753099655}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &103280353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103280349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9bb2003e53d2cd4095f12b14fa67d02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 0}
-  portraitImage: {fileID: 0}
-  levelText: {fileID: 0}
-  classText: {fileID: 0}
-  raceText: {fileID: 0}
-  alignmentText: {fileID: 0}
-  xpText: {fileID: 0}
-  backgroundText: {fileID: 0}
-  ageText: {fileID: 0}
-  heightText: {fileID: 0}
-  weightText: {fileID: 0}
-  eyesText: {fileID: 0}
-  skinText: {fileID: 0}
-  hairText: {fileID: 0}
 --- !u!114 &158589099 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3993998124368245132, guid: c824438576775f047bd2413b2b0c4083, type: 3}
@@ -384,6 +353,18 @@ PrefabInstance:
     - target: {fileID: 1587342363610034709, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830186815483779211, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
+      propertyPath: skillProficiencies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830186815483779211, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
+      propertyPath: skillProficiencies.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830186815483779211, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
+      propertyPath: skillProficiencies.Array.data[1]
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3074657228214932701, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
       propertyPath: age
@@ -1693,6 +1674,18 @@ PrefabInstance:
       propertyPath: backgroundDetails
       value: Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4692536873452132753, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
       propertyPath: abilityScoreList.Array.size
       value: 6
@@ -1968,6 +1961,18 @@ PrefabInstance:
     - target: {fileID: 3890141656576953657, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
       propertyPath: backgroundDetails
       value: Guild Artisan
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329019087683055203, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
+      propertyPath: skillProficiencies.Array.data[1]
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4692536873452132753, guid: 31f07ff68575a8040a7a1dafc80f3774, type: 3}
       propertyPath: abilityScoreList.Array.size
