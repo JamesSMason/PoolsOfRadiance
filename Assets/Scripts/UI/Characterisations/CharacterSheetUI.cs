@@ -1,9 +1,4 @@
-using Por.Controls;
-using PoR.Character;
 using PoR.Character.Settings;
-using PoR.Character.Settings.Base;
-using System;
-using TMPro;
 using UnityEngine;
 
 namespace PoR.UI.Characterisations
@@ -12,7 +7,6 @@ namespace PoR.UI.Characterisations
     {
         [SerializeField] private Sprite isProficientImage = null;
         [SerializeField] private Sprite notProficientImage = null;
-        [SerializeField] private TextMeshProUGUI ACText = null;
 
         private CharArmourClass charAC;
 
@@ -23,24 +17,6 @@ namespace PoR.UI.Characterisations
                 return isProficientImage;
             }
             return notProficientImage;
-        }
-
-        private void UpdateSelectedUnit(Unit currentUnit)
-        {
-            if (currentUnit == null)
-            {
-                return;
-            }
-
-            charAC = currentUnit.GetComponent<CharArmourClass>();
-
-            UpdateCharacterSheet();
-        }
-
-        private void UpdateCharacterSheet()
-        {
-
-            ACText.text = charAC.GetArmourClass().ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 using PoR.Character.Customisation.Classes;
 using PoR.Character.Customisation.Statistics;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +13,15 @@ namespace PoR.Character.Settings.Base
         private string characterClass;
         private int hitDie;
         private List<Abilities> abilitySaveProficiencyList;
-        private List<int> hitPointsPerLevel = new List<int>();
         private int classLevel;
+
+        public event Action OnLevelUp;
 
         private void Awake()
         {
             characterClass = classSO.GetClass();
             hitDie = classSO.GetHitDie();
             abilitySaveProficiencyList = classSO.GetAbilitySaveProficiencyList();
-            hitPointsPerLevel.Add(GetHitDie());
             classLevel = 1;
         }
 
@@ -39,16 +40,6 @@ namespace PoR.Character.Settings.Base
             return abilitySaveProficiencyList.Contains(GetComponent<CharAbilityScores>().GetAbility(index));
         }
 
-        public int GetMaxHitPoints()
-        {
-            int maxHP = 0;
-            for (int i = 0; i < hitPointsPerLevel.Count; i++)
-            {
-                maxHP += hitPointsPerLevel[i];
-            }
-            return maxHP;
-        }
-
         public int GetClassLevel()
         {
             return classLevel;
@@ -57,7 +48,7 @@ namespace PoR.Character.Settings.Base
         public void IncrementLevel()
         {
             classLevel++;
-            hitPointsPerLevel.Add(Random.Range(1, GetHitDie() + 1));
+            OnLevelUp?.Invoke();
         }
     }
 }

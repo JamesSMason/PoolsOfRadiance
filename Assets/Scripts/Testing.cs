@@ -1,5 +1,6 @@
 using Por.Controls;
 using PoR.Character;
+using PoR.Character.Settings.Base;
 using UnityEngine;
 
 public class Testing : MonoBehaviour
@@ -25,6 +26,10 @@ public class Testing : MonoBehaviour
             }
             SelectedUnit.Instance.SetSelectedUnit(units[unitIndex]);
             Debug.Log($"Selected unit is now {units[unitIndex].name}.");
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SelectedUnit.Instance.GetCurrentUnit().GetComponent<BaseClass>().IncrementLevel();
         }
     }
 }
