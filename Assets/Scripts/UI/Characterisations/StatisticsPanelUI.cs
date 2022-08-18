@@ -1,4 +1,3 @@
-using Por.Controls;
 using PoR.Character;
 using PoR.Character.Customisation.Statistics;
 using PoR.Character.Settings;
@@ -25,14 +24,14 @@ namespace PoR.UI.Characterisations
 
         private void OnEnable()
         {
-            SelectedUnit.Instance.OnSelectedUnitChanged += SelectedUnit_OnSelectedUnitChanged;
-            currentUnit = SelectedUnit.Instance.GetCurrentUnit();
+            UnitActionSystem.Instance.OnSelectedUnitChanged += SelectedUnit_OnSelectedUnitChanged;
+            currentUnit = UnitActionSystem.Instance.GetCurrentUnit();
             UpdateFields();
         }
 
         private void OnDisable()
         {
-            SelectedUnit.Instance.OnSelectedUnitChanged -= SelectedUnit_OnSelectedUnitChanged;
+            UnitActionSystem.Instance.OnSelectedUnitChanged -= SelectedUnit_OnSelectedUnitChanged;
         }
 
         private void UpdateFields()

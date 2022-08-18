@@ -7,29 +7,32 @@ namespace PoR.Character
     {
         [SerializeField] private float moveSpeed = 10f;
         [SerializeField] private float stoppingDistance = 0.2f;
+        [SerializeField] private float rotationSpeed = 100f;
+        [SerializeField] private Animator unitAnimator = null;
 
         private Vector3 targetPosition;
 
-        private void Start()
+        private void Awake()
         {
             targetPosition = transform.position;
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Move(MouseWorld.GetPosition());
-            }
-
             if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
             {
                 Vector3 moveDir = (targetPosition - transform.position).normalized;
+                transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
                 transform.position += moveDir * moveSpeed * Time.deltaTime;
+                unitAnimator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                unitAnimator.SetBool("IsWalking", false);
             }
         }
 
-        private void Move(Vector3 targetPosition)
+        public void Move(Vector3 targetPosition)
         {
             this.targetPosition = targetPosition;
         }
