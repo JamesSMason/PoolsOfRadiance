@@ -1,21 +1,28 @@
+using Por.Core;
 using PoR.Character;
 using PoR.Character.Settings.Base;
+using PoR.Grid;
 using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
     [SerializeField] private Unit[] units;
+    [SerializeField] private Transform gridDebugPrefab = null;
 
+    private GridSystem gridSystem;
     private int unitIndex = 0;
 
     private void Start()
     {
         units = FindObjectsOfType<Unit>();
         UnitActionSystem.Instance.SetSelectedUnit(units[0]);
+        gridSystem = new GridSystem(10, 10, 2);
+        gridSystem.CreateDebugObjects(gridDebugPrefab);
     }
 
     private void Update()
     {
+        Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
         if (Input.GetKeyDown(KeyCode.T))
         {
             unitIndex++;
