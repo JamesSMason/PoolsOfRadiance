@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace PoR.Grid
 {
     public class GridObject
@@ -11,6 +9,11 @@ namespace PoR.Grid
         {
             this.gridSystem = gridSystem;
             this.gridPosition = gridPosition;
+        }
+
+        public override string ToString()
+        {
+            return gridPosition.ToString();
         }
     }
 }

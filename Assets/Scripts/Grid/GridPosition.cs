@@ -13,7 +13,7 @@ namespace PoR.Grid
 
         public override string ToString()
         {
-            return $"Position ({x}, {z}).";
+            return $"({x}, {z})";
         }
     }
 }
