@@ -1,6 +1,8 @@
+using System;
+
 namespace PoR.Grid
 {
-    public struct GridPosition
+    public struct GridPosition: IEquatable<GridPosition>
     {
         public int x;
         public int z;
@@ -13,7 +15,42 @@ namespace PoR.Grid
 
         public override string ToString()
         {
-            return $"({x}, {z})";
+            return $"(x: {x}, z: {z})";
+        }
+
+        public static bool operator ==(GridPosition a, GridPosition b)
+        { 
+            return a.x == b.x && a.z == b.z;
+        }
+
+        public static bool operator !=(GridPosition a, GridPosition b)
+        {
+            return !(a == b);
+        }
+
+        public static GridPosition operator +(GridPosition a, GridPosition b)
+        {
+            return new GridPosition(a.x + b.x, a.z + b.z);
+        }
+
+        public static GridPosition operator -(GridPosition a, GridPosition b)
+        {
+            return new GridPosition(a.x - b.x, a.z - b.z);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public bool Equals(GridPosition other)
+        {
+            return this == other;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace PoR.Character
         [SerializeField] private LayerMask unitLayerMask;
 
         public event EventHandler OnSelectedUnitChanged;
+
         private void Awake()
         {
             if (Instance != null)

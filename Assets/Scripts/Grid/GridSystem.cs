@@ -52,7 +52,7 @@ namespace PoR.Grid
             }
         }
 
-        private GridObject GetGridObject(GridPosition gridPosition)
+        public GridObject GetGridObject(GridPosition gridPosition)
         {
             return gridObjects[gridPosition.x,gridPosition.z];
         }

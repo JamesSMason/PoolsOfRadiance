@@ -1,4 +1,4 @@
-using Por.Core;
+using PoR.Grid;
 using UnityEngine;
 
 namespace PoR.Character
@@ -11,10 +11,17 @@ namespace PoR.Character
         [SerializeField] private Animator unitAnimator = null;
 
         private Vector3 targetPosition;
+        private GridPosition gridPosition;
 
         private void Awake()
         {
             targetPosition = transform.position;
+        }
+
+        private void Start()
+        {
+            gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+            LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
         }
 
         private void Update()
@@ -29,6 +36,13 @@ namespace PoR.Character
             else
             {
                 unitAnimator.SetBool("IsWalking", false);
+            }
+
+            GridPosition oldGridPosition = gridPosition;
+            gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+            if (oldGridPosition != gridPosition)
+            {
+                LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPosition, gridPosition);
             }
         }
 

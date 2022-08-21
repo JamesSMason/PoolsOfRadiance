@@ -16,13 +16,12 @@ public class Testing : MonoBehaviour
     {
         units = FindObjectsOfType<Unit>();
         UnitActionSystem.Instance.SetSelectedUnit(units[0]);
-        gridSystem = new GridSystem(10, 10, 2);
-        gridSystem.CreateDebugObjects(gridDebugPrefab);
+        //gridSystem = new GridSystem(10, 10, 2);
+        //gridSystem.CreateDebugObjects(gridDebugPrefab);
     }
 
     private void Update()
     {
-        Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
         if (Input.GetKeyDown(KeyCode.T))
         {
             unitIndex++;
