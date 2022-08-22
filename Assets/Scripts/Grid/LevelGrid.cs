@@ -49,10 +49,21 @@ namespace PoR.Grid
 
         public void UnitMovedGridPosition(Unit unit, GridPosition fromGridPosition, GridPosition toGridPosition)
         {
-            gridSystem.GetGridObject(fromGridPosition).RemoveUnit(unit);
-            gridSystem.GetGridObject(toGridPosition).AddUnit(unit);
+            RemoveUnitAtGridPosition(fromGridPosition, unit);
+
+            AddUnitAtGridPosition(toGridPosition, unit);
+        }
+
+        public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
+        {
+            GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+            return gridObject.HasAnyUnit();
         }
 
         public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
+
+        public Vector3 GetWorldPosition(GridPosition gridPosition) => gridSystem.GetWorldPosition(gridPosition);
+
+        public bool IsValidGridPosition(GridPosition gridPosition) => gridSystem.IsValidGridPosition(gridPosition);
     }
 }

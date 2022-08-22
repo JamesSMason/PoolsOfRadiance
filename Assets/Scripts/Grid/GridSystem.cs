@@ -4,13 +4,13 @@ namespace PoR.Grid
 {
     public class GridSystem
     {
-        private int height;
         private int width;
+        private int height;
         private float cellSize;
 
         private GridObject[,] gridObjects;
 
-        public GridSystem(int height, int width, float cellSize)
+        public GridSystem(int width, int height, float cellSize)
         {
             this.height = height;
             this.width = width;
@@ -55,6 +55,11 @@ namespace PoR.Grid
         public GridObject GetGridObject(GridPosition gridPosition)
         {
             return gridObjects[gridPosition.x,gridPosition.z];
+        }
+
+        public bool IsValidGridPosition(GridPosition gridPosition)
+        {
+            return (gridPosition.x >= 0 && gridPosition.z >= 0 && gridPosition.x < width && gridPosition.z < height);
         }
     }
 }

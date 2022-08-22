@@ -366,6 +366,10 @@ PrefabInstance:
       propertyPath: skillProficiencies.Array.data[1]
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3030538651991233472, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
+      propertyPath: unitAnimator
+      value: 
+      objectReference: {fileID: 1350003755}
     - target: {fileID: 3074657228214932701, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
       propertyPath: age
       value: 25
@@ -1131,9 +1135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105327e2ea2cb3743822a7a9d708cfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 100
   cinemachineVirtualCamera: {fileID: 1749535119}
+  cameraMoveSpeed: 10
+  cameraRotationSpeed: 100
+  zoomFactor: 1
+  zoomSpeed: 5
 --- !u!1 &973897818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,6 +1389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1350003755 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9139514176834487498, guid: 4a95ce2b366fbf547a57f0c8f976c8b4, type: 3}
+  m_PrefabInstance: {fileID: 284674445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1395691110 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3993998125158434215, guid: c824438576775f047bd2413b2b0c4083, type: 3}
@@ -1564,8 +1575,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.3006394, y: -0.000000016410379, z: 0.0000000051729154, w: 0.9537379}
-  m_LocalPosition: {x: 0, y: 7, z: -10}
+  m_LocalRotation: {x: 0.14521307, y: -0.000000017025164, z: 0.0000000024987619, w: 0.98940045}
+  m_LocalPosition: {x: 0, y: 2.999998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1915,8 +1926,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749535117}
-  m_LocalRotation: {x: 0.3006394, y: -0.000000016410379, z: 0.0000000051729154, w: 0.9537379}
-  m_LocalPosition: {x: 0, y: 7, z: -10}
+  m_LocalRotation: {x: 0.14521307, y: -0.000000017025164, z: 0.0000000024987619, w: 0.98940045}
+  m_LocalPosition: {x: 0, y: 2.999998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2261,7 +2272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 7, z: -10}
+  m_FollowOffset: {x: 0, y: 2.999998, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0

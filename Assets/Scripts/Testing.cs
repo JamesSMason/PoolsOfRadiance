@@ -16,8 +16,6 @@ public class Testing : MonoBehaviour
     {
         units = FindObjectsOfType<Unit>();
         UnitActionSystem.Instance.SetSelectedUnit(units[0]);
-        //gridSystem = new GridSystem(10, 10, 2);
-        //gridSystem.CreateDebugObjects(gridDebugPrefab);
     }
 
     private void Update()
@@ -31,6 +29,7 @@ public class Testing : MonoBehaviour
             }
             UnitActionSystem.Instance.SetSelectedUnit(units[unitIndex]);
             Debug.Log($"Selected unit is now {units[unitIndex].name}.");
+            units[unitIndex].GetMoveAction().GetValidActionGridPositionList();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {

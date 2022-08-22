@@ -1,3 +1,4 @@
+using PoR.Actions;
 using PoR.Grid;
 using UnityEngine;
 
@@ -5,17 +6,12 @@ namespace PoR.Character
 {
     public class Unit : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 10f;
-        [SerializeField] private float stoppingDistance = 0.2f;
-        [SerializeField] private float rotationSpeed = 100f;
-        [SerializeField] private Animator unitAnimator = null;
-
-        private Vector3 targetPosition;
         private GridPosition gridPosition;
+        private MoveAction moveAction;
 
         private void Awake()
         {
-            targetPosition = transform.position;
+            moveAction = GetComponent<MoveAction>();
         }
 
         private void Start()
@@ -26,29 +22,22 @@ namespace PoR.Character
 
         private void Update()
         {
-            if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
+            GridPosition newGridPosition =  LevelGrid.Instance.GetGridPosition(transform.position);
+            if (newGridPosition != gridPosition)
             {
-                Vector3 moveDir = (targetPosition - transform.position).normalized;
-                transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
-                transform.position += moveDir * moveSpeed * Time.deltaTime;
-                unitAnimator.SetBool("IsWalking", true);
-            }
-            else
-            {
-                unitAnimator.SetBool("IsWalking", false);
-            }
-
-            GridPosition oldGridPosition = gridPosition;
-            gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-            if (oldGridPosition != gridPosition)
-            {
-                LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPosition, gridPosition);
+                LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+                gridPosition = newGridPosition;
             }
         }
 
-        public void Move(Vector3 targetPosition)
+        public MoveAction GetMoveAction()
         {
-            this.targetPosition = targetPosition;
+            return moveAction;
+        }
+
+        public GridPosition GetGridPosition()
+        {
+            return gridPosition;
         }
     }
 }

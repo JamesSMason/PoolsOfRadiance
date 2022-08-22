@@ -41,5 +41,10 @@ namespace PoR.Grid
         {
             unitList.Remove(unit);
         }
+
+        public bool HasAnyUnit()
+        {
+            return unitList.Count > 0;
+        }
     }
 }
