@@ -15,5 +15,7 @@ namespace PoR.Actions
         {
             unit = GetComponent<Unit>();
         }
+
+        public abstract string GetActionName();
     }
 }

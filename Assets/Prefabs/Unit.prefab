@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 3991547678832692063}
-  moveSpeed: 10
+  moveSpeed: 5
   stoppingDistance: 0.2
   rotationSpeed: 10
   maxMoveDistance: 4

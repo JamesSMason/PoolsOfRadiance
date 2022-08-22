@@ -1,4 +1,5 @@
 using Por.Core;
+using PoR.Actions;
 using PoR.Controls;
 using PoR.Grid;
 using System;
@@ -10,10 +11,11 @@ namespace PoR.Character
     {
         public static UnitActionSystem Instance { get; private set; }
 
-        [SerializeField] private Unit selectedUnit;
+        [SerializeField] private Unit unit;
         [SerializeField] private LayerMask unitLayerMask;
 
         private bool isBusy;
+        private BaseAction selectedAction;
 
         public event EventHandler OnSelectedUnitChanged;
 
@@ -28,6 +30,11 @@ namespace PoR.Character
             Instance = this;
         }
 
+        private void Start()
+        {
+            SetSelectedUnit(unit);
+        }
+
         private void Update()
         {
             if (isBusy)
@@ -35,47 +42,12 @@ namespace PoR.Character
                 return;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (TryHandleUnitSelection())
             {
-                if (TryHandleUnitSelection()) { return; }
-                GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
-                if (selectedUnit.GetMoveAction().IsValidActionGridPosition(mouseGridPosition))
-                {
-                    SetBusy();
-                    selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
-                }
+                return;
             }
-            if (Input.GetMouseButtonDown(1))
-            {
-                SetBusy();
-                selectedUnit.GetSpinAction().Spin(ClearBusy);
-            }
-        }
 
-        private bool TryHandleUnitSelection()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, unitLayerMask))
-            {
-                if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
-                {
-                    SetSelectedUnit(unit);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void SetSelectedUnit(Unit selectedUnit)
-        {
-            this.selectedUnit = selectedUnit;
-            OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        public Unit GetCurrentUnit()
-        {
-            return selectedUnit;
+            HandleSelectedAction();
         }
 
         public void SetBusy()
@@ -86,6 +58,67 @@ namespace PoR.Character
         public void ClearBusy()
         {
             isBusy = false;
+        }
+
+        private bool TryHandleUnitSelection()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, unitLayerMask))
+                {
+                    if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
+                    {
+                        SetSelectedUnit(unit);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void SetSelectedUnit(Unit unit)
+        {
+            this.unit = unit;
+            SetSelectedAction(unit.GetMoveAction());
+            OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void SetSelectedAction(BaseAction baseAction)
+        {
+            selectedAction = baseAction;
+        }
+
+        private void HandleSelectedAction()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+
+                switch (selectedAction)
+                {
+                    case MoveAction moveAction:
+                        if (moveAction.IsValidActionGridPosition(mouseGridPosition))
+                        {
+                            SetBusy();
+                            moveAction.Move(mouseGridPosition, ClearBusy);
+                        }
+
+                        break;
+
+                    case SpinAction spinAction:
+                        SetBusy();
+                        spinAction.Spin(ClearBusy);
+
+                        break;
+                }
+            }
+        }
+
+        public Unit GetCurrentUnit()
+        {
+            return unit;
         }
     }
 }
