@@ -1,12 +1,13 @@
 using PoR.Character;
 using PoR.Controls;
 using PoR.Grid;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace PoR.Actions
 {
-    public class MoveAction : MonoBehaviour
+    public class MoveAction : BaseAction
     {
         [Header("Component References")]
         [SerializeField] private Animator unitAnimator = null;
@@ -19,31 +20,41 @@ namespace PoR.Actions
         [SerializeField] private int maxMoveDistance = 4;
 
         private Vector3 targetPosition;
-        private Unit unit;
 
-        private void Awake()
+        protected override void Awake()
         {
-            unit = GetComponent<Unit>();
+            base.Awake();
             targetPosition = transform.position;
         }
 
         void Update()
         {
+            if (!isActive)
+            {
+                return;
+            }
+
+            Vector3 moveDir = (targetPosition - transform.position).normalized;
+
             if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
             {
-                Vector3 moveDir = (targetPosition - transform.position).normalized;
                 transform.position += moveDir * moveSpeed * Time.deltaTime;
-                transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
                 unitAnimator.SetBool("IsWalking", true);
             }
             else
             {
                 unitAnimator.SetBool("IsWalking", false);
+                isActive = false;
+                onActionComplete();
             }
+                
+            transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
         }
 
-        public void Move(GridPosition gridPosition)
+        public void Move(GridPosition gridPosition, Action onActionComplete)
         {
+            this.onActionComplete = onActionComplete;
+            isActive = true;
             targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
         }
 

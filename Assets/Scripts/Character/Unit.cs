@@ -9,10 +9,12 @@ namespace PoR.Character
     {
         private GridPosition gridPosition;
         private MoveAction moveAction;
+        private SpinAction spinAction;
 
         private void Awake()
         {
             moveAction = GetComponent<MoveAction>();
+            spinAction = GetComponent<SpinAction>();
         }
 
         private void Start()
@@ -34,6 +36,11 @@ namespace PoR.Character
         public MoveAction GetMoveAction()
         {
             return moveAction;
+        }
+
+        public SpinAction GetSpinAction()
+        {
+            return spinAction;
         }
 
         public GridPosition GetGridPosition()

@@ -13,6 +13,8 @@ namespace PoR.Character
         [SerializeField] private Unit selectedUnit;
         [SerializeField] private LayerMask unitLayerMask;
 
+        private bool isBusy;
+
         public event EventHandler OnSelectedUnitChanged;
 
         private void Awake()
@@ -28,14 +30,25 @@ namespace PoR.Character
 
         private void Update()
         {
+            if (isBusy)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (TryHandleUnitSelection()) { return; }
                 GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
                 if (selectedUnit.GetMoveAction().IsValidActionGridPosition(mouseGridPosition))
                 {
-                    selectedUnit.GetMoveAction().Move(mouseGridPosition);
+                    SetBusy();
+                    selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
                 }
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                SetBusy();
+                selectedUnit.GetSpinAction().Spin(ClearBusy);
             }
         }
 
@@ -63,6 +76,16 @@ namespace PoR.Character
         public Unit GetCurrentUnit()
         {
             return selectedUnit;
+        }
+
+        public void SetBusy()
+        {
+            isBusy = true;
+        }
+
+        public void ClearBusy()
+        {
+            isBusy = false;
         }
     }
 }
