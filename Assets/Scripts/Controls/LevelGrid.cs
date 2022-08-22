@@ -1,8 +1,9 @@
 using PoR.Character;
+using PoR.Grid;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PoR.Grid
+namespace PoR.Controls
 {
     public class LevelGrid : MonoBehaviour
     {
@@ -65,5 +66,9 @@ namespace PoR.Grid
         public Vector3 GetWorldPosition(GridPosition gridPosition) => gridSystem.GetWorldPosition(gridPosition);
 
         public bool IsValidGridPosition(GridPosition gridPosition) => gridSystem.IsValidGridPosition(gridPosition);
+
+        public int GetWidth() => gridSystem.GetWidth();
+
+        public int GetHeight() => gridSystem.GetHeight();
     }
 }

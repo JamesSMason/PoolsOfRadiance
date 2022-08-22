@@ -29,7 +29,6 @@ public class Testing : MonoBehaviour
             }
             UnitActionSystem.Instance.SetSelectedUnit(units[unitIndex]);
             Debug.Log($"Selected unit is now {units[unitIndex].name}.");
-            units[unitIndex].GetMoveAction().GetValidActionGridPositionList();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
