@@ -33,7 +33,7 @@ namespace PoR.UI.Actions
                 Destroy(buttonTransform.gameObject);
             }
 
-            Unit unit = UnitActionSystem.Instance.GetCurrentUnit();
+            Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
 
             foreach (BaseAction baseAction in unit.GetBaseActions())
             {

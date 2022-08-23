@@ -4,6 +4,7 @@ using PoR.Controls;
 using PoR.Grid;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace PoR.Character
 {
@@ -11,7 +12,7 @@ namespace PoR.Character
     {
         public static UnitActionSystem Instance { get; private set; }
 
-        [SerializeField] private Unit unit;
+        [SerializeField] private Unit selectedUnit;
         [SerializeField] private LayerMask unitLayerMask;
 
         private bool isBusy;
@@ -32,12 +33,17 @@ namespace PoR.Character
 
         private void Start()
         {
-            SetSelectedUnit(unit);
+            SetSelectedUnit(selectedUnit);
         }
 
         private void Update()
         {
             if (isBusy)
+            {
+                return;
+            }
+
+            if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;
             }
@@ -70,6 +76,10 @@ namespace PoR.Character
                 {
                     if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
                     {
+                        if (unit == selectedUnit)
+                        {
+                            return false;
+                        }
                         SetSelectedUnit(unit);
                         return true;
                     }
@@ -80,7 +90,7 @@ namespace PoR.Character
 
         public void SetSelectedUnit(Unit unit)
         {
-            this.unit = unit;
+            selectedUnit = unit;
             SetSelectedAction(unit.GetMoveAction());
             OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
         }
@@ -96,29 +106,22 @@ namespace PoR.Character
             {
                 GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
-                switch (selectedAction)
+                if (selectedAction.IsValidActionGridPosition(mouseGridPosition))
                 {
-                    case MoveAction moveAction:
-                        if (moveAction.IsValidActionGridPosition(mouseGridPosition))
-                        {
-                            SetBusy();
-                            moveAction.Move(mouseGridPosition, ClearBusy);
-                        }
-
-                        break;
-
-                    case SpinAction spinAction:
-                        SetBusy();
-                        spinAction.Spin(ClearBusy);
-
-                        break;
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
                 }
             }
         }
 
-        public Unit GetCurrentUnit()
+        public Unit GetSelectedUnit()
         {
-            return unit;
+            return selectedUnit;
+        }
+
+        public BaseAction GetSelectedAction()
+        {
+            return selectedAction;
         }
     }
 }

@@ -1,5 +1,7 @@
 using PoR.Character;
+using PoR.Grid;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PoR.Actions
@@ -17,5 +19,14 @@ namespace PoR.Actions
         }
 
         public abstract string GetActionName();
+
+        public abstract void TakeAction(GridPosition gridPosition, Action onActionComplete);
+
+        public virtual bool IsValidActionGridPosition(GridPosition gridPosition)
+        {
+            return GetValidActionGridPositionList().Contains(gridPosition);
+        }
+
+        public abstract List<GridPosition> GetValidActionGridPositionList();
     }
 }

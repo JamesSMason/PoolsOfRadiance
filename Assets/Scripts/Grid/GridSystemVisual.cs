@@ -1,3 +1,4 @@
+using PoR.Actions;
 using PoR.Character;
 using PoR.Controls;
 using System.Collections.Generic;
@@ -68,8 +69,9 @@ namespace PoR.Grid
         private void UpdateGridVisual()
         {
             HideAllGridPositions();
-            Unit selectedUnit = UnitActionSystem.Instance.GetCurrentUnit();
-            ShowGridPositionList(selectedUnit.GetMoveAction().GetValidActionGridPositionList());
+            Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
+            BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
+            ShowGridPositionList(selectedAction.GetValidActionGridPositionList());
         }
     }
 }

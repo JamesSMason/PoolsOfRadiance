@@ -17,7 +17,7 @@ namespace PoR.UI.Characterisations
         private void OnEnable()
         {
             UnitActionSystem.Instance.OnSelectedUnitChanged += SelectedUnit_OnSelectedUnitChanged;
-            currentUnit = UnitActionSystem.Instance.GetCurrentUnit();
+            currentUnit = UnitActionSystem.Instance.GetSelectedUnit();
             UpdateFields();
         }
 

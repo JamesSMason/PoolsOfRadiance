@@ -1,4 +1,6 @@
+using PoR.Grid;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PoR.Actions
@@ -26,7 +28,7 @@ namespace PoR.Actions
             }
         }
 
-        public void Spin(Action onActionComplete)
+        public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
         {
             this.onActionComplete = onActionComplete;
             isActive = true;
@@ -36,6 +38,12 @@ namespace PoR.Actions
         public override string GetActionName()
         {
             return "Spin";
+        }
+
+        public override List<GridPosition> GetValidActionGridPositionList()
+        {
+            GridPosition unitGridPosition = unit.GetGridPosition();
+            return new List<GridPosition> { unitGridPosition };
         }
     }
 }

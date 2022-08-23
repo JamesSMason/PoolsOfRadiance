@@ -22,7 +22,7 @@ namespace PoR.Character
 
         private void UpdateVisual()
         {
-            meshRenderer.enabled = (unit == UnitActionSystem.Instance.GetCurrentUnit());
+            meshRenderer.enabled = (unit == UnitActionSystem.Instance.GetSelectedUnit());
         }
 
         private void UnitActionSystem_OnSelectedUnitChanged(object sender, EventArgs e)

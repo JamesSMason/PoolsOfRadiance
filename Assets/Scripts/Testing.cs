@@ -32,7 +32,7 @@ public class Testing : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            UnitActionSystem.Instance.GetCurrentUnit().GetComponent<BaseClass>().IncrementLevel();
+            UnitActionSystem.Instance.GetSelectedUnit().GetComponent<BaseClass>().IncrementLevel();
         }
     }
 }

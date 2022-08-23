@@ -1,4 +1,3 @@
-using PoR.Character;
 using PoR.Controls;
 using PoR.Grid;
 using System;
@@ -51,19 +50,14 @@ namespace PoR.Actions
             transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotationSpeed);
         }
 
-        public void Move(GridPosition gridPosition, Action onActionComplete)
+        public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
         {
             this.onActionComplete = onActionComplete;
             isActive = true;
             targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
         }
 
-        public bool IsValidActionGridPosition(GridPosition gridPosition)
-        {
-            return GetValidActionGridPositionList().Contains(gridPosition);
-        }
-
-        public List<GridPosition> GetValidActionGridPositionList()
+        public override List<GridPosition> GetValidActionGridPositionList()
         {
             List<GridPosition> validGridPositionList = new List<GridPosition>();
 
